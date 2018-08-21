@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 import MapGL, { Marker } from 'react-map-gl';
 
-import 'mapbox-gl/dist/mapbox-gl.css';
+class Map extends Component {
+  static propTypes = {
+    showModal: PropTypes.func.isRequired,
+  };
 
-export default class Map extends Component {
   state = {
     viewport: {
       width: window.innerWidth,
@@ -16,38 +18,49 @@ export default class Map extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize);
+    window.addEventListener('resize', this.handleWindowResize);
 
-    this.resize();
+    this.handleWindowResize();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener('resize', this.handleWindowResize);
   }
 
-  resize = () => {
+  handleWindowResize = () => {
+    const { viewport } = this.state;
+
     this.setState({
       viewport: {
-        ...this.state.viewport,
+        ...viewport,
         width: window.innerWidth,
         height: window.innerHeight,
       },
     });
   };
 
-  handleMapClick = e => {
-    const [latitude, longitude] = e.lngLat;
-    alert(`Latitude: ${latitude} \nLongitude: ${longitude}`);
+  handleViewportChange = (viewport) => {
+    this.setState({ viewport });
+  };
+
+  handleMapClick = (e) => {
+    const { showModal } = this.props;
+    const [longitude, latitude] = e.lngLat;
+
+    showModal(latitude, longitude);
   };
 
   render() {
+    const { viewport } = this.state;
+    const { map } = this.props;
+
     return (
       <MapGL
-        {...this.state.viewport}
+        {...viewport}
         onClick={this.handleMapClick}
         mapStyle="mapbox://styles/mapbox/basic-v9"
         mapboxApiAccessToken="pk.eyJ1IjoiZGllZ28zZyIsImEiOiJjamh0aHc4em0wZHdvM2tyc3hqbzNvanhrIn0.3HWnXHy_RCi35opzKo8sHQ"
-        onViewportChange={viewport => this.setState({ viewport })}
+        onViewportChange={this.handleViewportChange}
       >
         <Marker
           latitude={-23.5439948}
@@ -65,7 +78,18 @@ export default class Map extends Component {
             src="https://avatars2.githubusercontent.com/u/2254731?v=4"
           />
         </Marker>
+        {/* {map.markers.map(marker => (
+          <Marker
+            key={marker.user.id}
+            latitude={marker.coordinates.latitude}
+            longitude={marker.coordinates.longitude}
+          >
+            <Avatar src={marker.user.avatar_url} />
+          </Marker>
+        ))} */}
       </MapGL>
     );
   }
 }
+
+export default Map;
