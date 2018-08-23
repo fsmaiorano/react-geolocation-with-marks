@@ -9,8 +9,12 @@ const Modal = () => (
       <h3>Adicionar novo usuário</h3>
       <input />
       <div>
-        <ButtonSecondary type="button">Cancelar</ButtonSecondary>
-        <ButtonPrimary type="button">Salvar</ButtonPrimary>
+        <ButtonSecondary id="modal-action-cancel" type="button">
+          Cancelar
+        </ButtonSecondary>
+        <ButtonPrimary id="modal-action-save" type="button">
+          Salvar
+        </ButtonPrimary>
       </div>
     </Container>
   </Backdrop>

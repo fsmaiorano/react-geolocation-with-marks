@@ -55,7 +55,7 @@ class Map extends Component {
     const [longitude, latitude] = e.lngLat;
     const { showModal } = this.state;
     const { setPosition } = this.props;
-    if (showModal && e.target.id === 'modal-backdrop') {
+    if ((showModal && !e.target.id === 'modal-backdrop') || e.target.id === 'modal-action-cancel') {
       this.setState({ showModal: false });
     } else {
       const position = {

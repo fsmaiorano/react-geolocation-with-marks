@@ -4,6 +4,7 @@ export const Backdrop = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
+  z-index: 50;
 `;
 
 export const Container = styled.div`
@@ -19,10 +20,10 @@ export const Container = styled.div`
   box-shadow: 0px 4px 77px 9px rgba(0, 0, 0, 0.53);
   align-items: center;
   flex-direction: column;
+    z-index: 75;
 
   div {
-      display: flex;
-    width: 68%;
+    display: flex;    
   }
 
   input {
