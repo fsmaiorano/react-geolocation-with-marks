@@ -54,29 +54,17 @@ class Map extends Component {
   handleMapClick = (e) => {
     const [longitude, latitude] = e.lngLat;
     const { showModal } = this.state;
-    const { addPositionRequest } = this.props;
-    if (showModal) {
+    const { setPosition } = this.props;
+    if (showModal && e.target.id === 'modal-backdrop') {
       this.setState({ showModal: false });
     } else {
       const position = {
         latitude,
         longitude,
       };
-      addPositionRequest(position);
-      this.showModal(latitude, longitude);
+      setPosition(position);
+      this.setState({ showModal: true });
     }
-  };
-
-  showModal = (latitude, longitude) => {
-    const { viewport } = this.state;
-    this.setState({
-      showModal: true,
-      //   viewport: {
-      //     ...viewport,
-      //     latitude,
-      //     longitude,
-      //   },
-    });
   };
 
   render() {

@@ -1,12 +1,8 @@
 export const Types = {
-  ADD_POSITION_REQUEST: 'map/ADD_POSITION_REQUEST',
-  ADD_POSITION_SUCCESS: 'map/ADD_POSITION_SUCCESS',
-  ADD_POSITION_FAILURE: 'map/ADD_POSITION_FAILURE',
+  SET_POSITION: 'map/SET_POSITION',
 };
 
 const INITIAL_STATE = {
-  feedback: null,
-  isLoading: false,
   position: {
     lat: null,
     lng: null,
@@ -15,30 +11,22 @@ const INITIAL_STATE = {
 
 export default function map(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case Types.ADD_POSITION_REQUEST:
-      return { ...state, isLoading: true };
-    case Types.ADD_POSITION_SUCCESS:
-      return { ...state, isLoading: false, data: action.payload.position };
-    case Types.ADD_POSITION_FAILURE:
-      return { ...state, isLoading: false, data: action.payload.feedback };
+    case Types.SET_POSITION:
+      return {
+        ...state,
+        position: {
+          lat: action.payload.position.latitude,
+          lng: action.payload.position.longitude,
+        },
+      };
     default:
       return state;
   }
 }
 
 export const Creators = {
-  addPositionRequest: position => ({
-    type: Types.ADD_POSITION_REQUEST,
+  setPosition: position => ({
+    type: Types.SET_POSITION,
     payload: { position },
-  }),
-
-  addPositionSuccess: data => ({
-    type: Types.ADD_POSITION_SUCCESS,
-    payload: { data },
-  }),
-
-  addPositionFailure: feedback => ({
-    type: Types.ADD_POSITION_FAILURE,
-    payload: { feedback },
   }),
 };

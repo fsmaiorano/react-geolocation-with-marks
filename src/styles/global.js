@@ -21,4 +21,9 @@ injectGlobal`
   html, body, #root {
     height: 100%;
   }
+
+  h1,h2,h3 {
+    font-family: sans-serif;
+  }
+
 `;
