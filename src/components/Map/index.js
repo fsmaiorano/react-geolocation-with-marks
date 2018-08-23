@@ -52,14 +52,17 @@ class Map extends Component {
   };
 
   handleMapClick = (e) => {
-    debugger;
     const [longitude, latitude] = e.lngLat;
     const { showModal } = this.state;
     const { addPositionRequest } = this.props;
     if (showModal) {
       this.setState({ showModal: false });
     } else {
-      addPositionRequest(latitude, longitude);
+      const position = {
+        latitude,
+        longitude,
+      };
+      addPositionRequest(position);
       this.showModal(latitude, longitude);
     }
   };

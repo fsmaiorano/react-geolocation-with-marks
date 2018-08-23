@@ -28,17 +28,17 @@ export default function map(state = INITIAL_STATE, action) {
 
 export const Creators = {
   addPositionRequest: position => ({
-    types: Types.ADD_POSITION_REQUEST,
+    type: Types.ADD_POSITION_REQUEST,
     payload: { position },
   }),
 
   addPositionSuccess: data => ({
-    types: Types.ADD_POSITION_SUCCESS,
+    type: Types.ADD_POSITION_SUCCESS,
     payload: { data },
   }),
 
   addPositionFailure: feedback => ({
-    types: Types.ADD_POSITION_FAILURE,
+    type: Types.ADD_POSITION_FAILURE,
     payload: { feedback },
   }),
 };
