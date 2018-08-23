@@ -7,10 +7,10 @@ export const Button = styled.button`
   margin: 10px;
 `;
 
-export const ButtonSecondary = Button.extend`
+export const ButtonSecondary = styled(Button)`
   background: #b4b3b2;
 `;
 
-export const ButtonPrimary = Button.extend`
+export const ButtonPrimary = styled(Button)`
   background: #79d83a;
 `;
