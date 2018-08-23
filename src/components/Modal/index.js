@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { Container } from './styles';
+
 const Modal = () => (
-  <div>
+  <Container>
     <h1>Modal</h1>
-  </div>
+  </Container>
 );
 
 export default Modal;

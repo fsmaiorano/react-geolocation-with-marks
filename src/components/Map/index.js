@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MapGL, { Marker } from 'react-map-gl';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { Creators as MapActions } from '../../store/ducks/map';
+
+import Modal from '../Modal';
+
 class Map extends Component {
   static propTypes = {
     showModal: PropTypes.func.isRequired,
@@ -31,6 +38,7 @@ class Map extends Component {
     const { viewport } = this.state;
 
     this.setState({
+      showModal: false,
       viewport: {
         ...viewport,
         width: window.innerWidth,
@@ -44,15 +52,32 @@ class Map extends Component {
   };
 
   handleMapClick = (e) => {
-    const { showModal } = this.props;
+    debugger;
     const [longitude, latitude] = e.lngLat;
+    const { showModal } = this.state;
+    const { addPositionRequest } = this.props;
+    if (showModal) {
+      this.setState({ showModal: false });
+    } else {
+      addPositionRequest(latitude, longitude);
+      this.showModal(latitude, longitude);
+    }
+  };
 
-    showModal(latitude, longitude);
+  showModal = (latitude, longitude) => {
+    const { viewport } = this.state;
+    this.setState({
+      showModal: true,
+      //   viewport: {
+      //     ...viewport,
+      //     latitude,
+      //     longitude,
+      //   },
+    });
   };
 
   render() {
-    const { viewport } = this.state;
-    const { map } = this.props;
+    const { viewport, showModal } = this.state;
 
     return (
       <MapGL
@@ -87,9 +112,19 @@ class Map extends Component {
             <Avatar src={marker.user.avatar_url} />
           </Marker>
         ))} */}
+        {showModal ? <Modal latitude={viewport.latitude} longitude={viewport.longitude} /> : null}
       </MapGL>
     );
   }
 }
 
-export default Map;
+const mapStateToProps = state => ({
+  map: state.map,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(MapActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Map);
