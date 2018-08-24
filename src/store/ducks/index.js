@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
 import map from './map';
-import user from './user';
+import users from './users';
 
 export default combineReducers({
   map,
-  user,
+  users,
 });

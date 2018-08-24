@@ -6,11 +6,11 @@ export const Types = {
 
 const INITIAL_STATE = {
   feedback: null,
-  user: null,
+  data: [],
   search: null,
 };
 
-export default function user(state = INITIAL_STATE, action) {
+export default function users(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.ADD_USER_REQUEST:
       return {
@@ -18,9 +18,10 @@ export default function user(state = INITIAL_STATE, action) {
         search: action.payload.search,
       };
     case Types.ADD_USER_SUCCESS:
+      debugger;
       return {
         ...state,
-        user: action.payload.user,
+        data: [...state.data, action.payload.users],
       };
     case Types.ADD_USER_FAILURE:
       return {
@@ -37,9 +38,9 @@ export const Creators = {
     type: Types.ADD_USER_REQUEST,
     payload: { search },
   }),
-  addUserSuccess: user => ({
+  addUserSuccess: users => ({
     type: Types.ADD_USER_SUCCESS,
-    payload: { user },
+    payload: { users },
   }),
   addUserFailure: feedback => ({
     type: Types.ADD_USER_FAILURE,

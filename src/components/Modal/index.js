@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Creators as UserActions } from '../../store/ducks/user';
+import { Creators as UserActions } from '../../store/ducks/users';
 
 import { Container, Backdrop } from './styles';
 import { ButtonPrimary, ButtonSecondary } from '../../styles/button';
@@ -44,7 +44,7 @@ class Modal extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user,
+  users: state.users,
   map: state.map,
 });
 
