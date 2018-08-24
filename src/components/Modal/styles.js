@@ -8,8 +8,9 @@ export const Backdrop = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 50.5%;
-  height: 25%;
+  width: 400px;
+  height: 200px;
+  border-radius: 7px;
   background-color: #f3f3f3;
   position: absolute;
   top: 50%;

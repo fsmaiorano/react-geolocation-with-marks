@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { Creators as UserActions } from '../../store/ducks/user';
+
 import { Container, Backdrop } from './styles';
 import { ButtonPrimary, ButtonSecondary } from '../../styles/button';
 
@@ -13,8 +18,9 @@ class Modal extends Component {
   };
 
   save = () => {
+    const { addUserRequest } = this.props;
     const { search } = this.state;
-    console.log(search);
+    addUserRequest(search);
   };
 
   render() {
@@ -37,4 +43,14 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+const mapStateToProps = state => ({
+  user: state.user,
+  map: state.map,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Modal);
