@@ -2,10 +2,12 @@ import React from 'react';
 
 import Map from '../../components/Map';
 
+import { Container } from './styles';
+
 const Main = () => (
-  <div>
+  <Container>
     <Map />
-  </div>
+  </Container>
 );
 
 export default Main;

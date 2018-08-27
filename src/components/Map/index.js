@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import MapGL, { Marker } from 'react-map-gl';
 
@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { Creators as MapActions } from '../../store/ducks/map';
 
 import Modal from '../Modal';
+import SidePanel from '../SidePanel';
 
 class Map extends Component {
   static propTypes = {
@@ -72,14 +73,16 @@ class Map extends Component {
     const { users } = this.props;
 
     return (
-      <MapGL
-        {...viewport}
-        onClick={this.handleMapClick}
-        mapStyle="mapbox://styles/mapbox/basic-v9"
-        mapboxApiAccessToken="pk.eyJ1IjoiZGllZ28zZyIsImEiOiJjamh0aHc4em0wZHdvM2tyc3hqbzNvanhrIn0.3HWnXHy_RCi35opzKo8sHQ"
-        onViewportChange={this.handleViewportChange}
-      >
-        {/* <Marker
+      <Fragment>
+        <SidePanel />
+        <MapGL
+          {...viewport}
+          onClick={this.handleMapClick}
+          mapStyle="mapbox://styles/mapbox/basic-v9"
+          mapboxApiAccessToken="pk.eyJ1IjoiZGllZ28zZyIsImEiOiJjamh0aHc4em0wZHdvM2tyc3hqbzNvanhrIn0.3HWnXHy_RCi35opzKo8sHQ"
+          onViewportChange={this.handleViewportChange}
+        >
+          {/* <Marker
           latitude={-23.5439948}
           longitude={-46.6065452}
           onClick={this.handleMapClick}
@@ -96,22 +99,22 @@ class Map extends Component {
           />
         </Marker> */}
 
-        {users
-          && users.data.map(user => (
-            <Marker key={user.id} latitude={user.position.lat} longitude={user.position.lng}>
-              <img
-                alt=""
-                style={{
-                  borderRadius: 100,
-                  width: 48,
-                  height: 48,
-                }}
-                src={user.avatar}
-              />
-            </Marker>
-          ))}
+          {users
+            && users.data.map(user => (
+              <Marker key={user.id} latitude={user.position.lat} longitude={user.position.lng}>
+                <img
+                  alt=""
+                  style={{
+                    borderRadius: 100,
+                    width: 48,
+                    height: 48,
+                  }}
+                  src={user.avatar}
+                />
+              </Marker>
+            ))}
 
-        {/* {map.markers.map(marker => (
+          {/* {map.markers.map(marker => (
           <Marker
             key={marker.user.id}
             latitude={marker.coordinates.latitude}
@@ -120,8 +123,9 @@ class Map extends Component {
             <Avatar src={marker.user.avatar_url} />
           </Marker>
         ))} */}
-        {showModal ? <Modal latitude={viewport.latitude} longitude={viewport.longitude} /> : null}
-      </MapGL>
+          {showModal ? <Modal latitude={viewport.latitude} longitude={viewport.longitude} /> : null}
+        </MapGL>
+      </Fragment>
     );
   }
 }
