@@ -18,7 +18,6 @@ export default function users(state = INITIAL_STATE, action) {
         search: action.payload.search,
       };
     case Types.ADD_USER_SUCCESS:
-      debugger;
       return {
         ...state,
         data: [...state.data, action.payload.users],
@@ -34,9 +33,9 @@ export default function users(state = INITIAL_STATE, action) {
 }
 
 export const Creators = {
-  addUserRequest: search => ({
+  addUserRequest: (search, position) => ({
     type: Types.ADD_USER_REQUEST,
-    payload: { search },
+    payload: { search, position },
   }),
   addUserSuccess: users => ({
     type: Types.ADD_USER_SUCCESS,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,14 +14,24 @@ class Modal extends Component {
     search: '',
   };
 
+  static propTypes = {
+    addUserRequest: PropTypes.func.isRequired,
+    map: PropTypes.shape({
+      position: {
+        lat: PropTypes.number,
+        lng: PropTypes.number,
+      },
+    }).isRequired,
+  };
+
   searchHandler = (term) => {
     this.setState({ search: term });
   };
 
   save = () => {
-    const { addUserRequest } = this.props;
+    const { addUserRequest, map } = this.props;
     const { search } = this.state;
-    addUserRequest(search);
+    addUserRequest(search, map.position);
   };
 
   render() {
