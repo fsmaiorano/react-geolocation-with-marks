@@ -69,6 +69,7 @@ class Map extends Component {
 
   render() {
     const { viewport, showModal } = this.state;
+    const { users } = this.props;
 
     return (
       <MapGL
@@ -78,7 +79,7 @@ class Map extends Component {
         mapboxApiAccessToken="pk.eyJ1IjoiZGllZ28zZyIsImEiOiJjamh0aHc4em0wZHdvM2tyc3hqbzNvanhrIn0.3HWnXHy_RCi35opzKo8sHQ"
         onViewportChange={this.handleViewportChange}
       >
-        <Marker
+        {/* <Marker
           latitude={-23.5439948}
           longitude={-46.6065452}
           onClick={this.handleMapClick}
@@ -93,7 +94,23 @@ class Map extends Component {
             }}
             src="https://avatars2.githubusercontent.com/u/2254731?v=4"
           />
-        </Marker>
+        </Marker> */}
+
+        {users
+          && users.data.map(user => (
+            <Marker key={user.id} latitude={user.position.lat} longitude={user.position.lng}>
+              <img
+                alt=""
+                style={{
+                  borderRadius: 100,
+                  width: 48,
+                  height: 48,
+                }}
+                src={user.avatar}
+              />
+            </Marker>
+          ))}
+
         {/* {map.markers.map(marker => (
           <Marker
             key={marker.user.id}
@@ -111,6 +128,7 @@ class Map extends Component {
 
 const mapStateToProps = state => ({
   map: state.map,
+  users: state.users,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(MapActions, dispatch);
