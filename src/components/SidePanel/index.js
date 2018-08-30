@@ -1,11 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import { Panel } from './styles';
+import {
+  Panel, User, Avatar, UserDetails,
+} from './styles';
 
-const SidePanel = () => (
+const SidePanel = ({ users }) => (
   <Panel>
-    <h1>Teste</h1>
+    {users
+      && users.data.map(user => (
+        <User key={user.id}>
+          <Avatar src={user.avatar} />
+          <UserDetails>
+            <span>{user.name}</span>
+            <span>{user.username}</span>
+          </UserDetails>
+        </User>
+      ))}
   </Panel>
 );
 
-export default SidePanel;
+const mapStateToProps = state => ({
+  users: state.users,
+});
+
+export default connect(mapStateToProps)(SidePanel);

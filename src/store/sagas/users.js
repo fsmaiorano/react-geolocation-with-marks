@@ -17,6 +17,7 @@ export function* addUser(action) {
         name: data.name,
         avatar: data.avatar_url,
         position: action.payload.position,
+        username: data.login,
       };
       yield put(UserActions.addUserSuccess(user));
     }
