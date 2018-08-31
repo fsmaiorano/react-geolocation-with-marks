@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
@@ -19,6 +20,17 @@ const SidePanel = ({ users }) => (
       ))}
   </Panel>
 );
+
+SidePanel.propTypes = {
+  users: PropTypes.shape({
+    data: PropTypes.arrayOf({
+      id: PropTypes.number,
+      avatar: PropTypes.string,
+      user: PropTypes.string,
+      username: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+};
 
 const mapStateToProps = state => ({
   users: state.users,

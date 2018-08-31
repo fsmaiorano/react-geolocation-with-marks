@@ -10,6 +10,8 @@ import { Creators as MapActions } from '../../store/ducks/map';
 import Modal from '../Modal';
 import SidePanel from '../SidePanel';
 
+import { Avatar } from './styles';
+
 class Map extends Component {
   static propTypes = {
     showModal: PropTypes.func.isRequired,
@@ -74,7 +76,8 @@ class Map extends Component {
 
     return (
       <Fragment>
-        <SidePanel />
+        {users && users.data.length > 0 ? <SidePanel /> : null}
+
         <MapGL
           {...viewport}
           onClick={this.handleMapClick}
@@ -82,47 +85,12 @@ class Map extends Component {
           mapboxApiAccessToken="pk.eyJ1IjoiZGllZ28zZyIsImEiOiJjamh0aHc4em0wZHdvM2tyc3hqbzNvanhrIn0.3HWnXHy_RCi35opzKo8sHQ"
           onViewportChange={this.handleViewportChange}
         >
-          {/* <Marker
-          latitude={-23.5439948}
-          longitude={-46.6065452}
-          onClick={this.handleMapClick}
-          captureClick
-        >
-          <img
-            alt=""
-            style={{
-              borderRadius: 100,
-              width: 48,
-              height: 48,
-            }}
-            src="https://avatars2.githubusercontent.com/u/2254731?v=4"
-          />
-        </Marker> */}
-
           {users
             && users.data.map(user => (
               <Marker key={user.id} latitude={user.position.lat} longitude={user.position.lng}>
-                <img
-                  alt=""
-                  style={{
-                    borderRadius: 100,
-                    width: 48,
-                    height: 48,
-                  }}
-                  src={user.avatar}
-                />
+                <Avatar src={user.avatar} />
               </Marker>
             ))}
-
-          {/* {map.markers.map(marker => (
-          <Marker
-            key={marker.user.id}
-            latitude={marker.coordinates.latitude}
-            longitude={marker.coordinates.longitude}
-          >
-            <Avatar src={marker.user.avatar_url} />
-          </Marker>
-        ))} */}
           {showModal ? <Modal latitude={viewport.latitude} longitude={viewport.longitude} /> : null}
         </MapGL>
       </Fragment>
