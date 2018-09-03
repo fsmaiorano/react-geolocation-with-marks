@@ -14,7 +14,11 @@ const SidePanel = ({ users }) => (
           <Avatar src={user.avatar} />
           <UserDetails>
             <span>{user.name}</span>
-            <span>{user.username}</span>
+            <span>
+              {user.username}
+              <i className="fa fa-times" aria-hidden="true" />
+              <i className="fa fa-angle-right" aria-hidden="true" />
+            </span>
           </UserDetails>
         </User>
       ))}
@@ -23,12 +27,18 @@ const SidePanel = ({ users }) => (
 
 SidePanel.propTypes = {
   users: PropTypes.shape({
+    feedback: PropTypes.string,
+    search: PropTypes.string,
     data: PropTypes.arrayOf({
       id: PropTypes.number,
       avatar: PropTypes.string,
       user: PropTypes.string,
       username: PropTypes.string,
-    }).isRequired,
+      position: PropTypes.shape({
+        lat: PropTypes.number,
+        lng: PropTypes.number,
+      }),
+    }),
   }).isRequired,
 };
 
