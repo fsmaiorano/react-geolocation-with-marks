@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
-  Panel, User, Avatar, UserDetails,
+  Panel, User, Avatar, UserDetails, UserActions,
 } from './styles';
 
 const SidePanel = ({ users }) => (
@@ -14,12 +14,12 @@ const SidePanel = ({ users }) => (
           <Avatar src={user.avatar} />
           <UserDetails>
             <span>{user.name}</span>
-            <span>
-              {user.username}
-              <i className="fa fa-times" aria-hidden="true" />
-              <i className="fa fa-angle-right" aria-hidden="true" />
-            </span>
+            <span>{user.username}</span>
           </UserDetails>
+          <UserActions>
+            <i className="fa fa-times" aria-hidden="true" />
+            <i className="fa fa-angle-right" aria-hidden="true" />
+          </UserActions>
         </User>
       ))}
   </Panel>

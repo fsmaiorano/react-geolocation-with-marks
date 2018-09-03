@@ -20,13 +20,13 @@ export const User = styled.div`
   flex-direction: row;
   align-items: center;
   margin-left: 10px;
+  border-bottom: 1px solid #eee;
 `;
 
 export const Avatar = styled.img`
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  margin-left: 15px;
 `;
 
 export const UserDetails = styled.div`
@@ -42,6 +42,28 @@ export const UserDetails = styled.div`
 
   span:last-child {
     font-size: 14px;
+    color: #999;
+  }
+`;
+
+export const UserActions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  right: 15px;
+
+  i:first-child {
+    margin-right: 50px;
+    cursor: pointer;
+
+    &:hover {
+      color: #999;
+    }
+  }
+
+  i:last-child {
+    font-size: 30px;
     color: #999;
   }
 `;
