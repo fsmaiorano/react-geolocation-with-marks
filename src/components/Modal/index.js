@@ -16,6 +16,7 @@ class Modal extends Component {
 
   static propTypes = {
     addUserRequest: PropTypes.func.isRequired,
+    closed: PropTypes.func.isRequired,
     map: PropTypes.shape({
       position: {
         lat: PropTypes.number,
@@ -32,16 +33,22 @@ class Modal extends Component {
     const { addUserRequest, map } = this.props;
     const { search } = this.state;
     addUserRequest(search, map.position);
+    this.close();
+  };
+
+  close = () => {
+    const { closed } = this.props;
+    closed();
   };
 
   render() {
     return (
       <Backdrop id="modal-backdrop">
-        <Container>
+        <Container id="modal">
           <h3>Adicionar novo usuário</h3>
-          <input type="text" onChange={e => this.searchHandler(e.target.value)} />
+          <input id="modal-input" type="text" onChange={e => this.searchHandler(e.target.value)} />
           <div>
-            <ButtonSecondary id="modal-action-cancel" type="button">
+            <ButtonSecondary id="modal-action-cancel" type="button" onClick={this.close}>
               Cancelar
             </ButtonSecondary>
             <ButtonPrimary id="modal-action-save" type="button" onClick={this.save}>

@@ -18,7 +18,7 @@ class SidePanel extends Component {
       data: PropTypes.arrayOf({
         id: PropTypes.number,
         avatar: PropTypes.string,
-        user: PropTypes.string,
+        name: PropTypes.string,
         username: PropTypes.string,
         position: PropTypes.shape({
           lat: PropTypes.number,

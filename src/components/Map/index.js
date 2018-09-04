@@ -13,10 +13,6 @@ import SidePanel from '../SidePanel';
 import { Avatar } from './styles';
 
 class Map extends Component {
-  static propTypes = {
-    showModal: PropTypes.func.isRequired,
-  };
-
   state = {
     viewport: {
       width: window.innerWidth,
@@ -56,18 +52,21 @@ class Map extends Component {
 
   handleMapClick = (e) => {
     const [longitude, latitude] = e.lngLat;
-    const { showModal } = this.state;
     const { setPosition } = this.props;
-    if ((showModal && !e.target.id === 'modal-backdrop') || e.target.id === 'modal-action-cancel') {
-      this.setState({ showModal: false });
-    } else {
-      const position = {
-        latitude,
-        longitude,
-      };
-      setPosition(position);
-      this.setState({ showModal: true });
-    }
+    const position = {
+      latitude,
+      longitude,
+    };
+    setPosition(position);
+    this.openModal(e, longitude, latitude);
+  };
+
+  openModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -91,8 +90,14 @@ class Map extends Component {
                 <Avatar src={user.avatar} />
               </Marker>
             ))}
-          {showModal ? <Modal latitude={viewport.latitude} longitude={viewport.longitude} /> : null}
         </MapGL>
+        {showModal ? (
+          <Modal
+            latitude={viewport.latitude}
+            longitude={viewport.longitude}
+            closed={this.closeModal}
+          />
+        ) : null}
       </Fragment>
     );
   }
