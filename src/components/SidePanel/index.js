@@ -37,7 +37,7 @@ class SidePanel extends Component {
     const { users } = this.props;
     return (
       <Panel>
-        {users
+        {!!users.data
           && users.data.map(user => (
             <User key={user.id}>
               <Avatar src={user.avatar} />

@@ -76,7 +76,7 @@ class Map extends Component {
 
     return (
       <Fragment>
-        {users && users.data.length > 0 ? <SidePanel /> : null}
+        {!!users.data && users.data.length > 0 ? <SidePanel /> : null}
 
         <MapGL
           {...viewport}
@@ -85,7 +85,7 @@ class Map extends Component {
           mapboxApiAccessToken="pk.eyJ1IjoiZGllZ28zZyIsImEiOiJjamh0aHc4em0wZHdvM2tyc3hqbzNvanhrIn0.3HWnXHy_RCi35opzKo8sHQ"
           onViewportChange={this.handleViewportChange}
         >
-          {users
+          {!!users.data
             && users.data.map(user => (
               <Marker key={user.id} latitude={user.position.lat} longitude={user.position.lng}>
                 <Avatar src={user.avatar} />
