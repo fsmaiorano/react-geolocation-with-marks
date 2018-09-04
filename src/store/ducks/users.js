@@ -32,9 +32,9 @@ export default function users(state = INITIAL_STATE, action) {
         feedback: action.payload.feedback,
       };
     case Types.REMOVE_USER_REQUEST:
-      state.data.filter(u => u !== action.payload.user);
       return {
-        ...state.data.filter(u => u !== action.payload.user),
+        ...state,
+        data: [...state.data.filter(u => u !== action.payload.user)],
       };
     default:
       return state;
