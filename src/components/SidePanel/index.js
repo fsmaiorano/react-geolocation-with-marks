@@ -15,16 +15,18 @@ class SidePanel extends Component {
     users: PropTypes.shape({
       feedback: PropTypes.string,
       search: PropTypes.string,
-      data: PropTypes.arrayOf({
-        id: PropTypes.number,
-        avatar: PropTypes.string,
-        name: PropTypes.string,
-        username: PropTypes.string,
-        position: PropTypes.shape({
-          lat: PropTypes.number,
-          lng: PropTypes.number,
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          avatar: PropTypes.string,
+          name: PropTypes.string,
+          username: PropTypes.string,
+          position: PropTypes.shape({
+            lat: PropTypes.number,
+            lng: PropTypes.number,
+          }).isRequired,
         }),
-      }),
+      ),
     }).isRequired,
   };
 

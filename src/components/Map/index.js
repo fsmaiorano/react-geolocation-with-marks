@@ -13,6 +13,30 @@ import SidePanel from '../SidePanel';
 import { Avatar } from './styles';
 
 class Map extends Component {
+  static propTypes = {
+    setPosition: PropTypes.func.isRequired,
+    map: PropTypes.shape({
+      lng: PropTypes.number,
+      lat: PropTypes.number,
+    }).isRequired,
+    users: PropTypes.shape({
+      feedback: PropTypes.string,
+      search: PropTypes.string,
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          avatar: PropTypes.string,
+          name: PropTypes.string,
+          username: PropTypes.string,
+          position: PropTypes.shape({
+            lat: PropTypes.number,
+            lng: PropTypes.number,
+          }).isRequired,
+        }),
+      ),
+    }).isRequired,
+  };
+
   state = {
     viewport: {
       width: window.innerWidth,
