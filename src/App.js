@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 
 import './config/reactotron';
 import './styles/global';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Main from './pages/main';
 import store from './store';

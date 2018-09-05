@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import MapGL, { Marker } from 'react-map-gl';
+import { toast } from 'react-toastify';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Creators as MapActions } from '../../store/ducks/map';
+import { Creators as UserActions } from '../../store/ducks/users';
 
 import Modal from '../Modal';
 import SidePanel from '../SidePanel';
@@ -51,6 +53,14 @@ class Map extends Component {
     window.addEventListener('resize', this.handleWindowResize);
 
     this.handleWindowResize();
+  }
+
+  componentDidUpdate() {
+    const { users, removeFeedback } = this.props;
+    if (users.feedback) {
+      toast.error(users.feedback);
+      removeFeedback();
+    }
   }
 
   componentWillUnmount() {
@@ -132,7 +142,8 @@ const mapStateToProps = state => ({
   users: state.users,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(MapActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...MapActions, ...UserActions }, dispatch);
 
 export default connect(
   mapStateToProps,

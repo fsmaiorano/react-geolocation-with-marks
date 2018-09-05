@@ -6,6 +6,8 @@ export const Types = {
   REMOVE_USER_REQUEST: 'user/REMOVE_USER_REQUEST',
   REMOVE_USER_SUCCESS: 'user/REMOVE_USER_SUCCESS',
   REMOVE_USER_FAILURE: 'user/REMOVE_USER_FAILURE',
+
+  REMOVE_FEEDBACK: 'user/REMOVE_FEEDBACK',
 };
 
 const INITIAL_STATE = {
@@ -35,6 +37,11 @@ export default function users(state = INITIAL_STATE, action) {
       return {
         ...state,
         data: [...state.data.filter(u => u !== action.payload.user)],
+      };
+    case Types.REMOVE_FEEDBACK:
+      return {
+        ...state,
+        feedback: null,
       };
     default:
       return state;
@@ -66,5 +73,10 @@ export const Creators = {
   removeUserFailure: feedback => ({
     type: Types.REMOVE_USER_FAILURE,
     payload: { feedback },
+  }),
+
+  removeFeedback: () => ({
+    type: Types.REMOVE_FEEDBACK,
+    payload: null,
   }),
 };

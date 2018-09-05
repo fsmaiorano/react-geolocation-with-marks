@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -33,6 +32,7 @@ class Modal extends Component {
     const { addUserRequest, map } = this.props;
     const { search } = this.state;
     addUserRequest(search, map.position);
+
     this.close();
   };
 
