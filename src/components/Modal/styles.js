@@ -29,10 +29,12 @@ export const Container = styled.div`
 
   input {
     border: none;
-    width: 300px;
-    height: 30px;
+    width: 320px;
+    height: 50px;
     padding: 10px;
     font-size: 20px;
+    margin: 10px;
+
 }
   }
 `;
